@@ -1,12 +1,10 @@
 {
-  "name": "Gmail Reader",
+  "name": "Email-validator",
   "image": "ruby:2.6",
   "description": "Help to get messages from Gmail",
   "keywords": [
     "gmail"
   ],
-  "repository": "https://github.com/Daniel1707/tcf-phoenix",
-  "addons": [
-    "heroku-redis"
-  ]
+  "repository": "https://github.com/Daniel1707/email-validator",
+  "addons": []
 }

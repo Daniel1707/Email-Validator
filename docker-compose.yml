@@ -4,6 +4,6 @@ services:
     build: .
     command: ruby app.rb -o 0.0.0.0
     volumes:
-      - .:/tcf-phoenix
+      - .:/email-valid
     ports:
       - "4569:4569"

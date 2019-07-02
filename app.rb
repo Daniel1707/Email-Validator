@@ -12,32 +12,45 @@ get '/email/health' do
   {'response': 'System is up =]'}.to_json
 end
 
-get '/email/message/:user/:password' do
+get '/email/message/:date/:from' do
   content_type :json
 
-  user = params["user"]
-  password = params["password"]
+  date = params["date"]
+  from = params["from"]
 
-  date_header = request.env['HTTP_DATE']
-  from_header = request.env['HTTP_FROM']
+  user_header = request.env['HTTP_USER']
+  password_header = request.env['HTTP_PASSWORD']
+  string_begin_header = request.env['HTTP_BEGIN']
+  string_end_header = request.env['HTTP_END']
 
-  gmail = Email.new(user, password)
-  message = gmail.get_email_message(date_header, from_header)
+  gmail = Email.new(user_header, password_header)
 
-  if message.eql? nil
+  if gmail.is_logged.eql? false
     content_type :json
     status 404
     {
-      "Message": "There is no message with data [#{date_header}] and from [#{from_header}]"
+      "Message": "Could not log in in Gmail, check user or password!!!",
+      "User": "#{user_header}",
+      "Password": "#{password_header}"
     }.to_json
   else
-    purchase_link = Decoder.decode_purchase_link(message)
+    message = gmail.get_email_message(date, from)
 
-    content_type :json
-    status 200
-    {
-      "Message": "Link found!",
-      "Link": "#{purchase_link}"
-    }.to_json
+    if message.eql? nil
+      content_type :json
+      status 404
+      {
+        "Message": "There is no message with data [#{date_header}] and from [#{from_header}]"
+      }.to_json
+    else
+      purchase_link = Decoder.decode_data(message, string_begin_header, string_end_header)
+
+      content_type :json
+      status 200
+      {
+        "Message": "Message found!",
+        "Link": "#{purchase_link}"
+      }.to_json
+    end
   end
 end
