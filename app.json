@@ -1,10 +1,9 @@
 {
-  "name": "Email-validator",
+  "name": "get-email-message",
   "image": "ruby:2.6",
   "description": "Help to get messages from Gmail",
   "keywords": [
     "gmail"
   ],
-  "repository": "https://github.com/Daniel1707/email-validator",
-  "addons": []
+  "repository": "https://github.com/Daniel1707/email-validator"
 }
