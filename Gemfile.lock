@@ -6,7 +6,7 @@ GEM
       mail (>= 2.2.1)
     gmail_xoauth (0.4.2)
       oauth (>= 0.3.6)
-    json (2.2.0)
+    json (2.3.0)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     mini_mime (1.0.1)
@@ -23,6 +23,7 @@ GEM
     tilt (2.0.9)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
